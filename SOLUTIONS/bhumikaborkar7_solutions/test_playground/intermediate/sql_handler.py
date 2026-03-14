@@ -72,7 +72,10 @@ def update_item(item_id: int, name: str = None, price: float = None) -> bool:
     cur.execute(sql, params)
     conn.commit()
     conn.close()
-    return True  # hint: better to check affected rows
+    if(cur.rowcount>0):
+        return True
+    else:
+        return False # hint: better to check affected rows
 
 
 def delete_item(item_id: int) -> bool:
